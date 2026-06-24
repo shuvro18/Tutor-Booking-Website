@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import NavLink from './NavLink';
 
 const NavbarPage = () => {
     return (
@@ -21,31 +22,32 @@ const NavbarPage = () => {
                         {/* মোবাইলে লিংকগুলো সেন্টারে থাকবে এবং নিচে নিচে বসবে, ট্যাবলেটে (md:) পাশাপাশি বসবে */}
                         <ul className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6">
                             <li>
-                                <Link href="/" className="text-sm font-medium text-gray-600 hover:text-[#003366]">
+                                <NavLink href="/" >
                                     Home
-                                </Link>
+                                </NavLink>
                             </li>
                             <li>
                                 {/* অ্যাক্টিভ লিংক - ছবিতে যেমন নিচে আন্ডারলাইন আছে */}
-                                <Link href="/tutors" className="relative text-sm font-semibold text-[#003366] md:py-1 md:after:absolute md:after:bottom-0 md:after:left-0 md:after:h-0.5 md:after:w-full md:after:bg-[#003366]">
+                                <NavLink href="/tutors" >
                                     Tutors
-                                </Link>
+                                </NavLink>
                             </li>
                             <li>
-                                <Link href="/add-tutor" className="text-sm font-medium text-gray-600 hover:text-[#003366]">
+                                <NavLink href="/add-tutor" >
                                     Add Tutor
-                                </Link>
+                                </NavLink>
                             </li>
                             <li>
-                                <Link href="/my-tutors" className="text-sm font-medium text-gray-600 hover:text-[#003366]">
+                                <NavLink href="/my-tutors">
                                     My Tutors
-                                </Link>
+                                </NavLink>
                             </li>
                             <li>
-                                <Link href="/booked-sessions" className="text-sm font-medium text-gray-600 hover:text-[#003366]">
+                                <NavLink href="/booked-sessions" >
                                     My Booked Sessions
-                                </Link>
+                                </NavLink>
                             </li>
+                            
                         </ul>
                     </div>
 
