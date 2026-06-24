@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import NavLink from './NavLink';
+import LRnavLink from './LRnavLink';
 
 const NavbarPage = () => {
     return (
@@ -58,12 +59,12 @@ const NavbarPage = () => {
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                             </svg>
                         </button>
-                        <Link href="/login" className="text-sm font-medium text-gray-600 px-4 py-2 rounded-md hover:text-white hover:bg-[#002244]">
+                        <LRnavLink href="/login" >
                             Login
-                        </Link>
-                        <Link href="/register" className="rounded-md text-gray-600 px-4 py-2 text-sm font-medium  transition-colors hover:text-white hover:bg-[#002244] whitespace-nowrap">
+                        </LRnavLink>
+                        <LRnavLink href="/register" >
                             Register
-                        </Link>
+                        </LRnavLink>
                     </div>
 
                 </div>
