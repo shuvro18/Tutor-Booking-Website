@@ -32,7 +32,7 @@ const Footer = () => {
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/services" className="group relative inline-block text-sm text-gray-600 hover:text-[#003366] transition-colors pb-1">
+                                <Link href="/servicess" className="group relative inline-block text-sm text-gray-600 hover:text-[#003366] transition-colors pb-1">
                                     Learning Services
                                     <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-[#003366] transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
