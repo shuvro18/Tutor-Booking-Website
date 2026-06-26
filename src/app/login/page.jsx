@@ -1,10 +1,16 @@
 "use client"
 
 import * as React from "react"
-import { LogIn } from "lucide-react" // লগইন আইকনের জন্য (যদি lucide-react ইন্সটল থাকে)
+import { Eye, EyeOff, LogIn } from "lucide-react" // লগইন আইকনের জন্য (যদি lucide-react ইন্সটল থাকে)
 import Link from "next/link";
+import { useState } from "react";
 
 const LoginPage = () => {
+
+    // for button eye effect
+
+    const [showPassword, setShowPassword] = useState(true)
+
     const handleSubmit = async(e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
@@ -37,7 +43,7 @@ const LoginPage = () => {
                             type="email"
                             autoComplete="email"
                             required
-                            placeholder="dr.smith@mediqueue.edu"
+                            placeholder="dr.shuvro@mediqueue.edu"
                             className="block w-full rounded-lg border border-gray-300 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 placeholder-gray-400 focus:border-slate-500 focus:bg-white focus:outline-none transition-colors"
                         />
                     </div>
@@ -52,15 +58,26 @@ const LoginPage = () => {
                                 Forgot Password?
                             </a>
                         </div>
-                        <input
-                            id="password"
-                            name="password"
-                            type="password"
-                            autoComplete="current-password"
-                            required
-                            placeholder="••••••••"
-                            className="block w-full rounded-lg border border-gray-300 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 placeholder-gray-400 focus:border-slate-500 focus:bg-white focus:outline-none transition-colors"
-                        />
+                       <div className="relative flex items-center">
+
+                            <input
+                                id="password"
+                                name="password"
+                                type={showPassword ? "password" : "text"}
+                                required
+                                placeholder="••••••••"
+                                className="block w-full rounded-lg border border-gray-300 bg-slate-50 pl-3 pr-10 py-2.5 text-sm text-slate-900 placeholder-gray-400 focus:border-slate-500 focus:bg-white focus:outline-none transition-colors"
+                            />
+
+                            <button
+                                className="absolute right-3 text-gray-400 hover:text-gray-600 focus:outline-none "
+                                type="button"
+                                onClick={() => { setShowPassword(!showPassword) }}
+                            >
+                                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                            </button>
+
+                        </div>
                     </div>
 
                     {/* লগইন বাটন */}
