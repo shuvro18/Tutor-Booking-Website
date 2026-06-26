@@ -1,4 +1,5 @@
 import Banner from "./components/Banner";
+import ForTest from "./components/ForTest";
 
 
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
     <div>
       
       <Banner></Banner>
+      {/* <ForTest></ForTest> */}
     </div>
   );
 }
