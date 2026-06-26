@@ -3,6 +3,7 @@
 import * as React from "react"
 import { Eye, EyeOff, UserPlus } from "lucide-react"
 import { useState } from "react";
+import Link from "next/link";
 
 
 
@@ -194,9 +195,9 @@ const RegisterPage = () => {
                 {/* লগইন লিংক */}
                 <div className="text-center text-sm text-gray-600 mt-4">
                     Already have an account?{" "}
-                    <a href="#" className="font-bold text-[#0a2540] hover:underline">
+                    <Link href="/login" className="font-bold text-[#0a2540] hover:underline">
                         Login
-                    </a>
+                    </Link>
                 </div>
 
             </div>
