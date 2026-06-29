@@ -4,25 +4,53 @@ import * as React from "react"
 import { Eye, EyeOff, LogIn } from "lucide-react" // লগইন আইকনের জন্য (যদি lucide-react ইন্সটল থাকে)
 import Link from "next/link";
 import { useState } from "react";
+import { authClient } from "../lib/auth-client";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+
+
 
 const LoginPage = () => {
+    const router = useRouter()
 
     // for button eye effect
 
     const [showPassword, setShowPassword] = useState(true)
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
+        try{
         const formData = new FormData(e.currentTarget);
         const user = Object.fromEntries(formData.entries());
-        console.log(user)
+
+        const { name, email, password } = user
+
+        const { data, error } = await authClient.signIn.email({
+            email: email, // required
+            password: password, // required
+            rememberMe: true,
+            // callbackURL: "/",
+        });
+        if(error){
+            toast.error(error.message)
+        }else{
+            toast.success("successfully login ", name)
+            router.push("/")
+        }
+    }catch(err){
+        console.log(err)
+    }
+
+
+        
     };
 
     return (
         <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-12 sm:px-6 lg:px-8">
             {/* মূল কার্ড কন্টেইনার */}
             <div className="w-full max-w-md space-y-6 rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
-                
+
                 {/* হেডার */}
                 <div className="text-center">
                     <h2 className="text-3xl font-bold tracking-tight text-slate-900">
@@ -58,7 +86,7 @@ const LoginPage = () => {
                                 Forgot Password?
                             </a>
                         </div>
-                       <div className="relative flex items-center">
+                        <div className="relative flex items-center">
 
                             <input
                                 id="password"

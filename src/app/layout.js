@@ -5,6 +5,7 @@ import NavbarPage from "./components/Navbar";
 
 import { Providers } from "./providers";
 import Footer from "./components/Footer";
+import { ToastContainer } from "react-toastify";
 
 
 
@@ -38,6 +39,7 @@ export default function RootLayout({ children }) {
           <main>{children}</main>
           <Footer></Footer>
         </Providers>
+        <ToastContainer position="top-center" />
       </body>
     </html>
   );

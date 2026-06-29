@@ -4,10 +4,18 @@ import * as React from "react"
 import { Eye, EyeOff, UserPlus } from "lucide-react"
 import { useState } from "react";
 import Link from "next/link";
+import { authClient } from "../lib/auth-client";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+
+
+
 
 
 
 const RegisterPage = () => {
+
+    const router = useRouter();
 
     // password error
     const [passwordError, setPasswordError] = useState("")
@@ -23,12 +31,36 @@ const RegisterPage = () => {
         const formData = new FormData(e.currentTarget);
         const user = Object.fromEntries(formData.entries());
 
+        const { name, email, password, image } = user
+
         if (user.password !== user.confirmPassword) {
             setPasswordError("Passwords do not match!")
             return;
         }
 
-        console.log(user)
+        try{
+        const { data, error } = await authClient.signUp.email({
+            name: name, // required
+            email: email, // required
+            password: password, // required
+            image: image,
+            callbackURL: "/",
+        });
+
+        if(error){
+            toast.err(error.message)
+            return
+        }else{
+            toast.success("register compleat "+ name);
+            router.push("/")
+        }
+    }
+    catch(err){
+        console.log(err)
+    }
+
+
+        console.log(data)
 
     };
 
