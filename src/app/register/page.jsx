@@ -17,6 +17,15 @@ const RegisterPage = () => {
 
     const router = useRouter();
 
+
+
+    //login with google 
+    const handleLogin = async () => {
+        const data = await authClient.signIn.social({
+            provider: "google",
+        });
+    };
+
     // password error
     const [passwordError, setPasswordError] = useState("")
 
@@ -38,26 +47,26 @@ const RegisterPage = () => {
             return;
         }
 
-        try{
-        const { data, error } = await authClient.signUp.email({
-            name: name, // required
-            email: email, // required
-            password: password, // required
-            image: image,
-            callbackURL: "/",
-        });
+        try {
+            const { data, error } = await authClient.signUp.email({
+                name: name, // required
+                email: email, // required
+                password: password, // required
+                image: image,
+                callbackURL: "/",
+            });
 
-        if(error){
-            toast.err(error.message)
-            return
-        }else{
-            toast.success("register compleat "+ name);
-            router.push("/")
+            if (error) {
+                toast.err(error.message)
+                return
+            } else {
+                toast.success("register compleat " + name);
+                router.push("/")
+            }
         }
-    }
-    catch(err){
-        console.log(err)
-    }
+        catch (err) {
+            console.log(err)
+        }
 
 
         console.log(data)
@@ -209,8 +218,9 @@ const RegisterPage = () => {
 
                 {/* গুগল সাইন-আপ বাটন */}
                 <button
+                    onClick={handleLogin}
                     type="button"
-                    className="flex w-full items-center justify-center gap-2 rounded-lg border border-gray-300 bg-gray-100 hover:bg-gray-200 px-4 py-2.5 text-sm font-medium text-slate-700 transition-colors"
+                    className="flex w-full items-center justify-center gap-2 rounded-lg border border-gray-300 bg-gray-100 hover:bg-gray-200 px-4 py-2.5 text-sm font-medium text-slate-700 transition-colors cursor-pointer"
                 >
                     {/* গুগল SVG লোগো */}
                     <svg className="h-4 w-4 mr-1" viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
@@ -225,9 +235,9 @@ const RegisterPage = () => {
                 </button>
 
                 {/* লগইন লিংক */}
-                <div className="text-center text-sm text-gray-600 mt-4">
+                <div className="text-center text-sm text-gray-600 mt-4 cursor-pointer">
                     Already have an account?{" "}
-                    <Link href="/login" className="font-bold text-[#0a2540] hover:underline">
+                    <Link href="/login" className="font-bold text-[#0a2540] hover:underline cursor-pointer">
                         Login
                     </Link>
                 </div>

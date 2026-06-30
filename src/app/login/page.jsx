@@ -153,9 +153,9 @@ const LoginPage = () => {
                 </button>
 
                 {/* রেজিস্টার লিংক */}
-                <div className="text-center text-sm text-gray-600 mt-4">
+                <div className="text-center text-sm text-gray-600 mt-4 ">
                     Do not have an account?{" "}
-                    <Link href="/register" className="font-bold text-[#0a2540] hover:underline">
+                    <Link href="/register" className="font-bold text-[#0a2540] hover:underline ">
                         Register
                     </Link>
                 </div>
