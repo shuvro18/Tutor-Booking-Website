@@ -147,7 +147,7 @@ const NavbarPage = () => {
 
                                     </div>
                                     <ul tabIndex="-1" className="cursor-pointer text-gray-500 dropdown-content z-1 menu menu-sm absolute scale-y-0 group-focus:scale-y-100 duration-200">
-                                        <li onClick={async () => await authClient.signOut()} className="cursor-pointer font-bold">
+                                        <li onClick={async () => await authClient.signOut()} className="cursor-pointer font-bold hover:bg-[#003366] hover:text-white hover:p-2 hover:rounded-md">
                                             Logout
                                         </li>
                                     </ul>
