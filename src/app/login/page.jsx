@@ -13,6 +13,15 @@ import { useRouter } from "next/navigation";
 const LoginPage = () => {
     const router = useRouter()
 
+
+
+    //signIN korar jonno 
+    const handleLogin = async () => {
+        const data = await authClient.signIn.social({
+            provider: "google",
+        });
+    };
+
     // for button eye effect
 
     const [showPassword, setShowPassword] = useState(true)
@@ -20,30 +29,30 @@ const LoginPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try{
-        const formData = new FormData(e.currentTarget);
-        const user = Object.fromEntries(formData.entries());
+        try {
+            const formData = new FormData(e.currentTarget);
+            const user = Object.fromEntries(formData.entries());
 
-        const { name, email, password } = user
+            const { name, email, password } = user
 
-        const { data, error } = await authClient.signIn.email({
-            email: email, // required
-            password: password, // required
-            rememberMe: true,
-            // callbackURL: "/",
-        });
-        if(error){
-            toast.error(error.message)
-        }else{
-            toast.success("successfully login ", name)
-            router.push("/")
+            const { data, error } = await authClient.signIn.email({
+                email: email, // required
+                password: password, // required
+                rememberMe: true,
+                // callbackURL: "/",
+            });
+            if (error) {
+                toast.error(error.message)
+            } else {
+                toast.success("successfully login ", name)
+                router.push("/")
+            }
+        } catch (err) {
+            console.log(err)
         }
-    }catch(err){
-        console.log(err)
-    }
 
 
-        
+
     };
 
     return (
@@ -127,8 +136,9 @@ const LoginPage = () => {
 
                 {/* গুগল সাইন-ইন বাটন */}
                 <button
+                onClick={handleLogin}
                     type="button"
-                    className="flex w-full items-center justify-center gap-2 rounded-lg border border-gray-300 bg-gray-100 hover:bg-gray-200 px-4 py-2.5 text-sm font-medium text-slate-700 transition-colors"
+                    className="flex w-full items-center justify-center gap-2 rounded-lg border border-gray-300 bg-gray-100 hover:bg-gray-200 px-4 py-2.5 text-sm font-medium text-slate-700 transition-colors cursor-pointer"
                 >
                     {/* গুগল জি-লোগো (SVG) */}
                     <svg className="h-4 w-4 mr-1" viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
