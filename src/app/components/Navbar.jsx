@@ -18,7 +18,7 @@ const NavbarPage = () => {
     return (
         <nav className=" top-0 z-50 w-full border-b border-gray-200 bg-white shadow-sm">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                
+
                 <div className="flex  md:flex-row md:h-16 items-center md:justify-between py-4 md:py-0">
 
 
@@ -47,27 +47,27 @@ const NavbarPage = () => {
                                     </li>
 
                                     {user ? (
-                                    <ul className='  '>
-                                        <li>
-                                            <NavLink href="/add-tutor" >
-                                                Add Tutor
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink href="/my-tutors">
-                                                My Tutors
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink href="/booked-sessions" >
-                                                My Booked Sessions
-                                            </NavLink>
-                                        </li>
-                                    </ul>
-                                ) : ""}
+                                        <ul className='  '>
+                                            <li>
+                                                <NavLink href="/add-tutor" >
+                                                    Add Tutor
+                                                </NavLink>
+                                            </li>
+                                            <li>
+                                                <NavLink href="/my-tutors">
+                                                    My Tutors
+                                                </NavLink>
+                                            </li>
+                                            <li>
+                                                <NavLink href="/booked-sessions" >
+                                                    My Booked Sessions
+                                                </NavLink>
+                                            </li>
+                                        </ul>
+                                    ) : ""}
 
                                 </ul>
-                                
+
                             </div>
 
                         </div>
@@ -146,8 +146,9 @@ const NavbarPage = () => {
                                         </div>
 
                                     </div>
-                                    <ul tabIndex="-1" className="cursor-pointer text-gray-500 dropdown-content z-1 menu menu-sm absolute scale-y-0 group-focus:scale-y-100 duration-200">
-                                        <li onClick={async () => await authClient.signOut()} className="cursor-pointer font-bold hover:bg-[#003366] hover:text-white hover:p-2 hover:rounded-md">
+                                    <ul onClick={async () => await authClient.signOut()} tabIndex="-1" className="cursor-pointer    text-gray-500 dropdown-content z-1 menu menu-sm absolute scale-y-0 group-focus:scale-y-100
+                                     duration-200">
+                                        <li className="cursor-pointer font-bold hover:bg-[#003366] hover:text-white hover:p-2 hover:rounded-md">
                                             Logout
                                         </li>
                                     </ul>

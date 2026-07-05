@@ -7,6 +7,7 @@ import Link from "next/link";
 import { authClient } from "../lib/auth-client";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { Description, FieldError, Input, Label, TextField } from "@heroui/react";
 
 
 
@@ -148,18 +149,42 @@ const RegisterPage = () => {
                             Password
                         </label>
                         <div className="relative flex items-center">
+                            <TextField
+                                isRequired
+                                className="block w-full "
+                                minLength={8}
+                                name="password"
+                                type="password"
+                                validate={(value) => {
+                                    if (value.length < 8) {
+                                        return "Password must be at least 8 characters";
+                                    }
+                                    if (!/[A-Z]/.test(value)) {
+                                        return "Password must contain at least one uppercase letter";
+                                    }
+                                    if (!/[0-9]/.test(value)) {
+                                        return "Password must contain at least one number";
+                                    }
+                                    return null;
+                                }}
+                            >
 
-                            <input
+                                <Input className="block w-full rounded-lg border border-gray-300 bg-slate-50 pl-3 pr-10 py-2.5 text-sm text-slate-900 placeholder-gray-400  focus:border-slate-500 focus:bg-white focus:outline-none transition-colors focus-visible:ring-0" placeholder="Enter your password" />
+                                <Description className="text-gray-400" >Must be at least 8 characters with 1 uppercase and 1 number</Description>
+                                <FieldError />
+                            </TextField>
+
+                            {/* <input
                                 id="password"
                                 name="password"
                                 type={showPassword ? "password" : "text"}
                                 required
                                 placeholder="••••••••"
                                 className="block w-full rounded-lg border border-gray-300 bg-slate-50 pl-3 pr-10 py-2.5 text-sm text-slate-900 placeholder-gray-400 focus:border-slate-500 focus:bg-white focus:outline-none transition-colors"
-                            />
+                            /> */}
 
                             <button
-                                className="absolute right-3 text-gray-400 hover:text-gray-600 focus:outline-none "
+                                className="absolute right-3 top-3.5 text-gray-400 hover:text-gray-600 focus:outline-none "
                                 type="button"
                                 onClick={() => { setShowPassword(!showPassword) }}
                             >
