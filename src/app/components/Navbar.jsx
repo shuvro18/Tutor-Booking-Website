@@ -12,11 +12,11 @@ const NavbarPage = () => {
 
     const { data: session } = authClient.useSession();
     const user = session?.user
-    console.log(user)
+    // console.log(user)
 
 
     return (
-        <nav className=" top-0 z-50 w-full border-b border-gray-200  shadow-sm">
+        <nav className=" top-0 z-50 w-full border-b border-gray-200 bg-slate-50 dark:bg-zinc-950  shadow-sm">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
                 <div className="flex  md:flex-row md:h-16 items-center md:justify-between py-4 md:py-0">
