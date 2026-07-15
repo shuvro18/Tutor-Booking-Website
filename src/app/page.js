@@ -1,5 +1,6 @@
 import Banner from "./components/Banner";
 import ForTest from "./components/ForTest";
+import WhyChoose from "./components/WhyUs";
 
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
     <div>
       
       <Banner></Banner>
+      <WhyChoose></WhyChoose>
       {/* <ForTest></ForTest> */}
     </div>
   );
