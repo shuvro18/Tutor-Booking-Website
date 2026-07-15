@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const Footer = () => {
     return (
-        <footer className="w-full bg-[#F1F3F6] text-gray-600 border-t border-gray-200 mt-auto">
+        <footer className="w-full text-gray-600 border-t border-gray-200 mt-auto">
             <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
 
                 {/* মেইন গ্রিড কন্টেইনার */}

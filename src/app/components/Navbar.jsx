@@ -16,7 +16,7 @@ const NavbarPage = () => {
 
 
     return (
-        <nav className=" top-0 z-50 w-full border-b border-gray-200 bg-white shadow-sm">
+        <nav className=" top-0 z-50 w-full border-b border-gray-200  shadow-sm">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
                 <div className="flex  md:flex-row md:h-16 items-center md:justify-between py-4 md:py-0">
