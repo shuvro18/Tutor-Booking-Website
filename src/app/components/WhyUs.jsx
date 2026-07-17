@@ -20,10 +20,10 @@ const WhyChoose = () => {
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
 
           {/* Card 1: Verified Tutors */}
-          <div className="flex flex-col items-center text-center p-8 rounded-2xl border border-gray-100 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-sm hover:shadow-md transition-all duration-300">
+          <div className=" group flex flex-col items-center text-center p-8 rounded-2xl border border-gray-100 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1.5">
             {/* Icon Container */}
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 mb-5">
-              <ShieldCheck className="h-6 w-6 text-blue-600" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 mb-5 group-hover:scale-110">
+              <ShieldCheck className="h-6 w-6 text-blue-600 " />
             </div>
             {/* Title */}
             <h3 className="text-xl font-bold text-[#0a2540] dark:text-zinc-400 mb-3">
@@ -36,9 +36,9 @@ const WhyChoose = () => {
           </div>
 
           {/* Card 2: Easy Scheduling */}
-          <div className="flex flex-col items-center text-center p-8 rounded-2xl border border-gray-100 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-sm hover:shadow-md transition-all duration-300">
+          <div className=" group flex flex-col items-center text-center p-8 rounded-2xl border border-gray-100 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1.5">
             {/* Icon Container */}
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 mb-5">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 mb-5 group-hover:scale-110">
               <Calendar className="h-6 w-6 text-emerald-600" />
             </div>
             {/* Title */}
@@ -52,9 +52,9 @@ const WhyChoose = () => {
           </div>
 
           {/* Card 3: Secure Payments */}
-          <div className="flex flex-col items-center text-center p-8 rounded-2xl border border-gray-100 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-sm hover:shadow-md transition-all duration-300">
+          <div className=" group hover:scale-y-1.5 flex flex-col items-center text-center p-8 rounded-2xl border border-gray-100 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-sm hover:shadow-md transition-all duration-300">
             {/* Icon Container */}
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-50 mb-5">
+            <div className=" group-hover:scale-110 flex h-12 w-12 items-center justify-center rounded-xl bg-amber-50 mb-5">
               <CreditCard className="h-6 w-6 text-amber-600" />
             </div>
             {/* Title */}

@@ -11,7 +11,7 @@ export default function Home() {
       <Banner></Banner>
       <TutorsInHomePage></TutorsInHomePage>
       <WhyChoose></WhyChoose>
-      {/* <ForTest></ForTest> */}
+      <ForTest></ForTest>
     </div>
   );
 }
