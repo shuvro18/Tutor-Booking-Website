@@ -1,15 +1,15 @@
-import { getUsers } from '@/app/lib/data';
+import { getSingleTutor } from '@/app/lib/data';
 import Image from 'next/image';
 import React from 'react';
 
 
 const TutorDetails = async ({ params }) => {
 
-    const users = await getUsers();
-
     const { id } = await params;
+    const user = await getSingleTutor(id);
 
-    const find = users.find(user => user._id == id);
+
+    // const find = users.find(user => user._id == id);
    
 
    
@@ -45,8 +45,8 @@ const TutorDetails = async ({ params }) => {
                                 <Image
                                     height={300}
                                     width={300}
-                                    src={find.photoUrl}
-                                    alt={find.tutorName}
+                                    src={user.photoUrl}
+                                    alt={user.tutorName}
                                     className="w-full h-full object-cover"
                                 />
                             </div>
@@ -55,7 +55,7 @@ const TutorDetails = async ({ params }) => {
                             <div className="space-y-3 flex-1">
                                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                                     <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white">
-                                        {find.tutorName}
+                                        {user.tutorName}
                                     </h1>
                                     <span className="text-xs font-semibold px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/50 self-center sm:self-auto">
                                         Available Now
@@ -63,14 +63,14 @@ const TutorDetails = async ({ params }) => {
                                 </div>
 
                                 <p className="text-lg font-semibold text-slate-700 dark:text-zinc-300">
-                                    {find.subject}
+                                    {user.subject}
                                 </p>
 
                                 <p className="text-sm text-slate-500 dark:text-zinc-400 flex items-center justify-center md:justify-start gap-1.5">
                                     <svg className="w-4 h-4 shrink-0 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
                                     </svg>
-                                    {find.institution}
+                                    {user.institution}
                                 </p>
                             </div>
                         </div>
@@ -87,7 +87,7 @@ const TutorDetails = async ({ params }) => {
                                     </svg>
                                     Availability
                                 </span>
-                                <p className="text-lg font-bold text-slate-800 dark:text-zinc-100">{find.availableTime}</p>
+                                <p className="text-lg font-bold text-slate-800 dark:text-zinc-100">{user.availableTime}</p>
                                 
                             </div>
 
@@ -100,8 +100,8 @@ const TutorDetails = async ({ params }) => {
                                     </svg>
                                     Mode & Location
                                 </span>
-                                <p className="text-lg font-bold text-slate-800 dark:text-zinc-100">{find.teachingMode}</p>
-                                <p className="text-xs text-slate-500 dark:text-zinc-400">{ find.teachingMode==="hybrid" ? "Oline and Offline" : find.teachingMode === "online" ? "Online" : "Offline" }</p>
+                                <p className="text-lg font-bold text-slate-800 dark:text-zinc-100">{user.teachingMode}</p>
+                                <p className="text-xs text-slate-500 dark:text-zinc-400">{ user.teachingMode==="hybrid" ? "Oline and Offline" : user.teachingMode === "online" ? "Online" : "Offline" }</p>
                             </div>
 
                             {/* Rates & Slots */}
@@ -112,9 +112,9 @@ const TutorDetails = async ({ params }) => {
                                     </svg>
                                     Rates & Slots
                                 </span>
-                                <p className="text-lg font-bold text-slate-800 dark:text-zinc-100">{find.hourlyFee} <span className="text-sm font-normal text-slate-500">/ hr</span></p>
+                                <p className="text-lg font-bold text-slate-800 dark:text-zinc-100">{user.hourlyFee} <span className="text-sm font-normal text-slate-500">/ hr</span></p>
                                 <div className='flex items-center gap-2'>
-                                    <p className="text-xs text-rose-500 dark:text-rose-400 font-semibold">{find.totalSlot}</p>
+                                    <p className="text-xs text-rose-500 dark:text-rose-400 font-semibold">{user.totalSlot}</p>
                                     <span className="text-sm font-normal text-slate-500"> / slot</span>
                                 </div>
                             </div>
@@ -131,7 +131,7 @@ const TutorDetails = async ({ params }) => {
                                     About the Tutor
                                 </h2>
                                 <p className="text-sm md:text-base leading-relaxed text-slate-600 dark:text-zinc-300">
-                                    {find.experience}
+                                    {user.experience}
                                 </p>
                             </div>
 
@@ -147,7 +147,7 @@ const TutorDetails = async ({ params }) => {
                                     <div className="relative space-y-1">
                                         <span className="absolute -left-5.25 top-1.5 w-2 h-2 rounded-full bg-teal-500 dark:bg-teal-600 ring-4 ring-white dark:ring-zinc-900" />
                                         <h4 className="font-bold text-slate-800 dark:text-zinc-100 text-sm md:text-base">
-                                            Senior Lecturer at {find.institution}
+                                            Senior Lecturer at {user.institution}
                                         </h4>
                                         <p className="text-xs text-slate-400 dark:text-zinc-500">
                                             2018 - Present
@@ -196,7 +196,7 @@ const TutorDetails = async ({ params }) => {
                             <div className="space-y-4 text-sm text-slate-600 dark:text-zinc-300">
                                 <div className="flex justify-between">
                                     <span>Hourly Rate</span>
-                                    <span className="font-bold text-slate-800 dark:text-zinc-100">${find.hourlyFee}</span>
+                                    <span className="font-bold text-slate-800 dark:text-zinc-100">${user.hourlyFee}</span>
                                 </div>
                                 <div className="flex justify-between">
                                     <span>Service Fee</span>
@@ -207,7 +207,7 @@ const TutorDetails = async ({ params }) => {
 
                                 <div className="flex justify-between items-center">
                                     <span className="text-base font-bold text-slate-800 dark:text-zinc-100">Total Estimate</span>
-                                    <span className="text-2xl font-black text-slate-900 dark:text-white">${find.hourlyFee + 2}</span>
+                                    <span className="text-2xl font-black text-slate-900 dark:text-white">${user.hourlyFee + 2}</span>
                                 </div>
                             </div>
 
