@@ -1,14 +1,18 @@
 "use client"
 
+import { createUser } from "../lib/actions";
+
 
 
 const AddTutor = () => {  
-
+  
   const handleSubmit = async(e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const user = Object.fromEntries(formData.entries());
     console.log(user)
+    const sendUser = await createUser(user);
+    
     // console.log("Submitted Tutor Data:", formData);
   };
 

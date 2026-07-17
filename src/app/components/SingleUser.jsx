@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 
 const SingleUser = ({ user }) => {
-    console.log(user)
+    
     return (
         <div className="flex justify-center items-center rounded-2xl  dark:bg-zinc-950">
             {/* মেইন কার্ড কন্টেইনার (এখানে group ক্লাসটি ব্যবহার করা হয়েছে হোভার ইফেক্ট কন্ট্রোল করার জন্য) */}
