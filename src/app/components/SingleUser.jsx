@@ -1,7 +1,8 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
-const SingleUser = ({user}) => {
+const SingleUser = ({ user }) => {
     console.log(user)
     return (
         <div className="flex justify-center items-center rounded-2xl  dark:bg-zinc-950">
@@ -11,7 +12,7 @@ const SingleUser = ({user}) => {
                 {/* ইমেজ বক্স (জুম ইফেক্টের জন্য overflow-hidden দেওয়া হয়েছে) */}
                 <div className="overflow-hidden rounded-xl h-48 w-full mb-4">
                     <Image
-                        height={200}
+                        height={300}
                         width={300}
                         src={user.photoUrl}  // আপনার ইমেজের সোর্স এখানে বসাবেন
                         alt={user.tutorName}
@@ -46,9 +47,11 @@ const SingleUser = ({user}) => {
                 </div>
 
                 {/* বুক সেশন বাটন (ক্লিক এবং হোভার অ্যানিমেশনসহ) */}
-                <button className="w-full bg-teal-600 text-white font-semibold py-3 rounded-xl mt-5 hover:bg-teal-700 active:scale-95 transition-all duration-200 shadow-md hover:shadow-teal-100">
-                    Book Session
-                </button>
+                <Link href={`tutors/${user._id}`}>
+                    <button className="w-full bg-teal-600 text-white font-semibold py-3 rounded-xl mt-5 hover:bg-teal-700 active:scale-95 transition-all duration-200 shadow-md hover:shadow-teal-100">
+                        Book Session
+                    </button>
+                </Link>
 
             </div>
         </div>
