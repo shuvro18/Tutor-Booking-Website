@@ -9,7 +9,7 @@ export default function Home() {
       
       <Banner></Banner>
       <WhyChoose></WhyChoose>
-      {/* <ForTest></ForTest> */}
+      <ForTest></ForTest>
     </div>
   );
 }
