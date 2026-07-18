@@ -11,8 +11,6 @@ export const createUser = async(newUser)=>{
         body: JSON.stringify(newUser)
     })
     const data = await res.json();
-    if(data.insertedId){
-        redirect("/tutors")
-    }
+    
     return data 
 }

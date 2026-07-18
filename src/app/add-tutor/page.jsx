@@ -1,25 +1,49 @@
 "use client"
 
+import { toast } from "react-toastify";
 import { createUser } from "../lib/actions";
+import { useRouter } from "next/navigation";
 
 
 
-const AddTutor = () => {  
-  
-  const handleSubmit = async(e) => {
+
+const AddTutor = () => {
+  const router = useRouter();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const user = Object.fromEntries(formData.entries());
     console.log(user)
-    const sendUser = await createUser(user);
+
     
+    let isSuccess = false;
+    try {
+      const sendUser = await createUser(user);
+
+      if (sendUser && (sendUser.success || sendUser.insertedId || sendUser.id)) {
+        toast.success("Tutor added successfully");
+        isSuccess = true;
+      } else {
+        toast.error("sorry something is not okay")
+      }
+    } catch (error) {
+
+      console.log("This is error", error)
+      toast.error("Network error. Please try again")
+
+    }
+    if(isSuccess){
+      router.push("/tutors");
+    }
+
     // console.log("Submitted Tutor Data:", formData);
   };
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-zinc-950 py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center transition-colors duration-300">
       <div className="max-w-3xl w-full bg-white dark:bg-zinc-900 p-6 sm:p-10 rounded-2xl border border-gray-100 dark:border-zinc-800 shadow-sm transition-all">
-        
+
         {/* Title */}
         <div className="text-center mb-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-zinc-100">
@@ -32,7 +56,7 @@ const AddTutor = () => {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
-          
+
           {/* Tutor Name */}
           <div>
             <label className="block text-sm font-semibold text-slate-700 dark:text-zinc-300 mb-2">
@@ -41,7 +65,7 @@ const AddTutor = () => {
             <input
               type="text"
               name="tutorName"
-              
+
               placeholder="Shuvro biswas"
               required
               className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 text-slate-900 dark:text-zinc-100 placeholder-gray-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 focus:border-blue-500 dark:focus:border-blue-400 text-sm transition-all"
@@ -56,7 +80,7 @@ const AddTutor = () => {
             <input
               type="url"
               name="photoUrl"
-              
+
               placeholder="imgbb / postimage link"
               required
               className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 text-slate-900 dark:text-zinc-100 placeholder-gray-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 focus:border-blue-500 dark:focus:border-blue-400 text-sm transition-all"
@@ -71,7 +95,7 @@ const AddTutor = () => {
               </label>
               <select
                 name="subject"
-                
+
                 required
                 className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 focus:border-blue-500 dark:focus:border-blue-400 text-sm transition-all"
               >
@@ -89,7 +113,7 @@ const AddTutor = () => {
               </label>
               <select
                 name="teachingMode"
-                
+
                 required
                 className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 focus:border-blue-500 dark:focus:border-blue-400 text-sm transition-all"
               >
@@ -109,7 +133,7 @@ const AddTutor = () => {
             <input
               type="text"
               name="availableTime"
-              
+
               placeholder="Sun - Thu 5:00 PM - 8:00 PM"
               required
               className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 text-slate-900 dark:text-zinc-100 placeholder-gray-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 focus:border-blue-500 dark:focus:border-blue-400 text-sm transition-all"
@@ -125,7 +149,7 @@ const AddTutor = () => {
               <input
                 type="number"
                 name="hourlyFee"
-                
+
                 placeholder="500"
                 required
                 className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 text-slate-900 dark:text-zinc-100 placeholder-gray-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 focus:border-blue-500 dark:focus:border-blue-400 text-sm transition-all"
@@ -139,7 +163,7 @@ const AddTutor = () => {
               <input
                 type="number"
                 name="totalSlot"
-                
+
                 placeholder="10"
                 required
                 className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 text-slate-900 dark:text-zinc-100 placeholder-gray-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 focus:border-blue-500 dark:focus:border-blue-400 text-sm transition-all"
@@ -155,7 +179,7 @@ const AddTutor = () => {
             <input
               type="date"
               name="startDate"
-              
+
               required
               className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 text-slate-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 focus:border-blue-500 dark:focus:border-blue-400 text-sm transition-all scheme-light dark:scheme-dark"
             />
@@ -170,7 +194,7 @@ const AddTutor = () => {
               <input
                 type="text"
                 name="institution"
-                
+
                 placeholder="Dhaka University"
                 required
                 className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 text-slate-900 dark:text-zinc-100 placeholder-gray-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 focus:border-blue-500 dark:focus:border-blue-400 text-sm transition-all"
@@ -184,7 +208,7 @@ const AddTutor = () => {
               <input
                 type="text"
                 name="location"
-                
+
                 placeholder="Khulna"
                 required
                 className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 text-slate-900 dark:text-zinc-100 placeholder-gray-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 focus:border-blue-500 dark:focus:border-blue-400 text-sm transition-all"
@@ -199,7 +223,7 @@ const AddTutor = () => {
             </label>
             <textarea
               name="experience"
-              
+
               rows="4"
               placeholder="3 years teaching experience..."
               required
