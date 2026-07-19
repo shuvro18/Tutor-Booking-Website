@@ -8,7 +8,7 @@ import React from 'react';
 import { updateUser } from "../lib/actions";
 
 const UpdateTutorModal = ({ id, user }) => {
-    console.log(user)
+    // console.log(user)
 
     const [isOpen, setIsOpen] = useState(false);
 
