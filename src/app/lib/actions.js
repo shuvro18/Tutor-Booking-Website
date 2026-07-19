@@ -20,8 +20,22 @@ export const deleteUserData = async (userId) => {
     method: "DELETE",
   });
   const data = await res.json();
-  if (data.deletedCount > 0){
-    revalidatePath("/my-tutors")
+  if (data.deletedCount > 0) {
+    revalidatePath("/my-tutors");
   }
-     return data;
+  return data;
+};
+
+export const updateUser = async (userId, newUser) => {
+  const res = await fetch(`http://localhost:5000/users/${userId}`, {
+    method: "PATCH",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(newUser),
+  });
+  const data = await res.json();
+  if (data.modifiedCount > 0) {
+    revalidatePath("/my-tutors");
+  }
 };

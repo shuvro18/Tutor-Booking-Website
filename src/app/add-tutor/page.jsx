@@ -25,9 +25,6 @@ const AddTutor = () => {
       return
     }
 
-
-
-
     let isSuccess = false;
     try {
       const sendUser = await createUser(user);

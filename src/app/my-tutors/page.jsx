@@ -3,9 +3,9 @@ import { auth } from '../lib/auth';
 import { headers } from 'next/headers';
 import { getUserCollection } from '../lib/data';
 import Link from 'next/link';
-import { Pencil } from 'lucide-react';
 import DeleteButton from '../components/DeleteButton';
 import { deleteUserData } from '../lib/actions';
+import UpdateTutorModal from '../components/UpdateTutorModal';
 
 const UserAddedData = async () => {
 
@@ -80,9 +80,8 @@ const UserAddedData = async () => {
                                                 <DeleteButton deleteTutor={deleteUserData} id={e._id}></DeleteButton>
 
                                                 {/* এডিট বাটন */}
-                                                <button className="p-1.5 text-green-500 hover:bg-green-50 dark:hover:bg-green-950/30 rounded-lg transition-colors" title="Edit">
-                                                    <Pencil className="w-4 h-4" />
-                                                </button>
+                                                <UpdateTutorModal id={e._id} user={e}></UpdateTutorModal>
+                                                
                                             </div>
                                         </td>
                                     </tr>
