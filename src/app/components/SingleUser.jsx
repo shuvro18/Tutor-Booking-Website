@@ -1,8 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import { auth } from '../lib/auth';
+import { headers } from 'next/headers';
 
-const SingleUser = ({ user }) => {
+const SingleUser = async({ user }) => {
+
+    const session = await auth.api.getSession({
+            headers: await headers() // you need to pass the headers object.
+        })
     
     return (
         <div className="flex justify-center items-center rounded-2xl  dark:bg-zinc-950">
@@ -47,7 +53,7 @@ const SingleUser = ({ user }) => {
                 </div>
 
                 {/* বুক সেশন বাটন (ক্লিক এবং হোভার অ্যানিমেশনসহ) */}
-                <Link href={`tutors/${user._id}`}>
+                <Link href={`${session ? `tutors/${user._id}` :"/login"} `}>
                     <button className="w-full bg-teal-600 text-white font-semibold py-3 rounded-xl mt-5 hover:bg-teal-700 active:scale-95 transition-all duration-200 shadow-md hover:shadow-teal-100">
                         Book Session
                     </button>
