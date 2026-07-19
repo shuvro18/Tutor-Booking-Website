@@ -14,3 +14,4 @@ export const createUser = async(newUser)=>{
     
     return data 
 }
+

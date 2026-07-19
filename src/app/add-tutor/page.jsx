@@ -3,20 +3,31 @@
 import { toast } from "react-toastify";
 import { createUser } from "../lib/actions";
 import { useRouter } from "next/navigation";
+import { authClient } from "../lib/auth-client";
+
 
 
 
 
 const AddTutor = () => {
   const router = useRouter();
+  const { data: session } = authClient.useSession();
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const user = Object.fromEntries(formData.entries());
-    console.log(user)
 
-    
+    if (session?.user?.email) {
+      user.createdBy = session.user.email;
+    } else {
+      return
+    }
+
+
+
+
     let isSuccess = false;
     try {
       const sendUser = await createUser(user);
@@ -25,15 +36,15 @@ const AddTutor = () => {
         toast.success("Tutor added successfully");
         isSuccess = true;
       } else {
-        toast.error("sorry something is not okay")
+        toast.error("sorry something is not okay");
       }
     } catch (error) {
 
       console.log("This is error", error)
-      toast.error("Network error. Please try again")
+      toast.error("Network error. Please try again");
 
     }
-    if(isSuccess){
+    if (isSuccess) {
       router.push("/tutors");
     }
 

@@ -10,3 +10,11 @@ export const getSingleTutor = async (userId)=>{
     return data 
 
 }
+
+
+export const getUserCollection = async (email)=>{
+    const res = await fetch(`http://localhost:5000/my-tutors/${email}`);
+    const data = await res.json();
+    return data 
+
+}
