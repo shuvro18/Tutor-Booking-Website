@@ -35,7 +35,7 @@ const UserAddedData = async () => {
                 </div>
 
                 {/* ডাটা যদি থাকে (টেবিল ভিউ) */}
-                {userData ? (
+                {userData && userData.length ? (
                     <div className="overflow-x-auto w-full">
                         <table className="min-w-full divide-y divide-gray-100 dark:divide-zinc-800 text-left text-sm">
                             <thead>
