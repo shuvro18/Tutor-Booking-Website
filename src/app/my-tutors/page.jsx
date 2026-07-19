@@ -51,7 +51,7 @@ const UserAddedData = async () => {
                             <tbody className="divide-y divide-gray-100 dark:divide-zinc-800 text-slate-700 dark:text-zinc-300">
                                 {userData.map(e =>
 
-                                    <tr key={userData._id} className="hover:bg-slate-50/30 dark:hover:bg-zinc-800/20 transition-colors">
+                                    <tr key={e._id} className="hover:bg-slate-50/30 dark:hover:bg-zinc-800/20 transition-colors">
                                         <td className="px-4 py-4 whitespace-nowrap font-medium text-slate-900 dark:text-zinc-100">
                                             {e.tutorName}
                                         </td>
