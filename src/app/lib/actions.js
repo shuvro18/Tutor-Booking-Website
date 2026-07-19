@@ -1,4 +1,6 @@
-import { redirect } from "next/navigation";
+"use server";
+
+import { revalidatePath } from "next/cache";
 
 export const createUser = async (newUser) => {
   const res = await fetch("http://localhost:5000/users", {
@@ -14,11 +16,12 @@ export const createUser = async (newUser) => {
 };
 
 export const deleteUserData = async (userId) => {
-    'use server';
-    const res = await fetch(`http://localhost:5000/users/${userId}`,{
-        method:'DELETE'
-    })
-    const data = await res.json();
-        return data;
-    
+  const res = await fetch(`http://localhost:5000/users/${userId}`, {
+    method: "DELETE",
+  });
+  const data = await res.json();
+  if (data.deletedCount > 0){
+    revalidatePath("/my-tutors")
+  }
+     return data;
 };

@@ -5,6 +5,7 @@ import { getUserCollection } from '../lib/data';
 import Link from 'next/link';
 import { Pencil } from 'lucide-react';
 import DeleteButton from '../components/DeleteButton';
+import { deleteUserData } from '../lib/actions';
 
 const UserAddedData = async () => {
 
@@ -15,7 +16,7 @@ const UserAddedData = async () => {
     // console.log(user);
 
     const userData = await getUserCollection(user);
-    console.log(userData)
+    
 
 
     return (
@@ -76,8 +77,8 @@ const UserAddedData = async () => {
                                         <td className="px-4 py-4 whitespace-nowrap">
                                             <div className="flex items-center justify-center gap-3">
                                                 {/* delete button */}
-                                                <DeleteButton></DeleteButton>                                           
-                                                
+                                                <DeleteButton deleteTutor={deleteUserData} id={e._id}></DeleteButton>
+
                                                 {/* এডিট বাটন */}
                                                 <button className="p-1.5 text-green-500 hover:bg-green-50 dark:hover:bg-green-950/30 rounded-lg transition-colors" title="Edit">
                                                     <Pencil className="w-4 h-4" />

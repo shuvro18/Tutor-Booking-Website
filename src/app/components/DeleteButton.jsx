@@ -3,7 +3,10 @@
 import { TriangleExclamation } from "@gravity-ui/icons";
 import { AlertDialog, Button } from "@heroui/react";
 import { Trash2 } from 'lucide-react';
-const DeleteButton = () => {
+const DeleteButton = ({ deleteTutor, id }) => {
+    const handleDelete = async (id) => {
+        await deleteTutor(id)
+    }
     return (
         <div>
             <AlertDialog>
@@ -34,8 +37,8 @@ const DeleteButton = () => {
                                 <Button className="w-full" slot="close">
                                     Keep Account
                                 </Button>
-                                <Button className="w-full" slot="close" variant="danger">
-                                    Delete Forever
+                                <Button onClick={()=>handleDelete(id)} className="w-full" slot="close" variant="danger">
+                                    Conform Delete
                                 </Button>
                             </AlertDialog.Footer>
                         </AlertDialog.Dialog>
