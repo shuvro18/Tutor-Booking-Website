@@ -3,7 +3,8 @@ import { auth } from '../lib/auth';
 import { headers } from 'next/headers';
 import { getUserCollection } from '../lib/data';
 import Link from 'next/link';
-import { Trash2, Pencil } from 'lucide-react';
+import { Pencil } from 'lucide-react';
+import DeleteButton from '../components/DeleteButton';
 
 const UserAddedData = async () => {
 
@@ -74,10 +75,9 @@ const UserAddedData = async () => {
                                         </td>
                                         <td className="px-4 py-4 whitespace-nowrap">
                                             <div className="flex items-center justify-center gap-3">
-                                                {/* ডিলিট বাটন */}
-                                                <button className="p-1.5 text-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-lg transition-colors" title="Delete">
-                                                    <Trash2 className="w-4 h-4" />
-                                                </button>
+                                                {/* delete button */}
+                                                <DeleteButton></DeleteButton>                                           
+                                                
                                                 {/* এডিট বাটন */}
                                                 <button className="p-1.5 text-green-500 hover:bg-green-50 dark:hover:bg-green-950/30 rounded-lg transition-colors" title="Edit">
                                                     <Pencil className="w-4 h-4" />
