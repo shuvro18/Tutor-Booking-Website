@@ -3,8 +3,8 @@ import Image from 'next/image';
 import { auth } from '../lib/auth';
 import { headers } from 'next/headers';
 import { getBooking } from '../lib/data';
-
-import { Trash } from 'lucide-react';
+import { deleteBooking } from '../lib/actions';
+import DeleteBooking from '../components/DeleteBooking';
 
 const MyBookedSession = async () => {
     const session = await auth.api.getSession({
@@ -13,9 +13,9 @@ const MyBookedSession = async () => {
     const userId = session.user.id;
 
     const bookedData = await getBooking(userId);
-    console.log(bookedData.length)
+    console.log(userId)
 
-    let state = "ha"
+//    const deleted = await deleteBooking()
 
 
     return (
@@ -86,9 +86,7 @@ const MyBookedSession = async () => {
                                         {/* অ্যাকশন বাটন */}
                                         <td className="py-6 px-6 text-right">
 
-                                            <button className="text-rose-600 dark:text-rose-400 hover:text-rose-700 font-semibold text-sm transition-all hover:underline cursor-pointer">
-                                               <Trash></Trash>
-                                            </button>
+                                           <DeleteBooking deleted={deleteBooking} id={item._id}></DeleteBooking>
 
                                         </td>
                                     </tr>
