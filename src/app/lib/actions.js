@@ -39,3 +39,16 @@ export const updateUser = async (userId, newUser) => {
     revalidatePath("/my-tutors");
   }
 };
+
+export const bookingUser = async (bookingData) => {
+  const res = await fetch(`http://localhost:5000/booking`, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify(bookingData),
+  });
+  const data = await res.json();
+
+  return data;
+};

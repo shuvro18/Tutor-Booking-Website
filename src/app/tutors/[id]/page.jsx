@@ -1,19 +1,32 @@
+
+import BookButton from '@/app/components/BookButton';
+import { auth } from '@/app/lib/auth';
 import { getSingleTutor } from '@/app/lib/data';
+import { headers } from 'next/headers';
 import Image from 'next/image';
 import React from 'react';
 
 
 const TutorDetails = async ({ params }) => {
 
+    const session = await auth.api.getSession({
+        headers: await headers() // you need to pass the headers object.
+    })
+    const sessionUser = session.user;
+
     const { id } = await params;
     const user = await getSingleTutor(id);
 
 
-    // const find = users.find(user => user._id == id);
-   
 
-   
-    
+
+
+
+    // const find = users.find(user => user._id == id);
+
+
+
+
 
     // availableTime: "Mon - Wed 4:00 PM - 6:00 PM"
     // experience: "Practicing physician offering comprehensive guidelines on clinical pathology."
@@ -88,7 +101,7 @@ const TutorDetails = async ({ params }) => {
                                     Availability
                                 </span>
                                 <p className="text-lg font-bold text-slate-800 dark:text-zinc-100">{user.availableTime}</p>
-                                
+
                             </div>
 
                             {/* Mode & Location */}
@@ -101,7 +114,7 @@ const TutorDetails = async ({ params }) => {
                                     Mode & Location
                                 </span>
                                 <p className="text-lg font-bold text-slate-800 dark:text-zinc-100">{user.teachingMode}</p>
-                                <p className="text-xs text-slate-500 dark:text-zinc-400">{ user.teachingMode==="hybrid" ? "Oline and Offline" : user.teachingMode === "online" ? "Online" : "Offline" }</p>
+                                <p className="text-xs text-slate-500 dark:text-zinc-400">{user.teachingMode === "hybrid" ? "Oline and Offline" : user.teachingMode === "online" ? "Online" : "Offline"}</p>
                             </div>
 
                             {/* Rates & Slots */}
@@ -112,10 +125,26 @@ const TutorDetails = async ({ params }) => {
                                     </svg>
                                     Rates & Slots
                                 </span>
-                                <p className="text-lg font-bold text-slate-800 dark:text-zinc-100">{user.hourlyFee} <span className="text-sm font-normal text-slate-500">/ hr</span></p>
-                                <div className='flex items-center gap-2'>
-                                    <p className="text-xs text-rose-500 dark:text-rose-400 font-semibold">{user.totalSlot}</p>
-                                    <span className="text-sm font-normal text-slate-500"> / slot</span>
+                                <p className="text-lg font-bold text-slate-800 dark:text-zinc-100">
+                                    ${user.hourlyFee} <span className="text-sm font-normal text-slate-500">/ hr</span>
+                                </p>
+
+                                {/* টোটাল স্লট এবং রিমেইনিং স্লট প্রদর্শন */}
+                                <div className="flex items-center justify-between pt-1 text-xs font-medium border-t border-slate-100 dark:border-zinc-800 mt-1">
+                                    <div className="text-slate-500 dark:text-zinc-400">
+                                        Total: <span className="font-bold text-slate-700 dark:text-zinc-200">{user.totalSlot}</span>
+                                    </div>
+
+                                    {/* রিমেইনিং স্লটের হিসাব: (totalSlot - bookedSlots) */}
+                                    <div className="flex items-center gap-1">
+                                        <span className="text-slate-500 dark:text-zinc-400">Remaining:</span>
+                                        <span className={`font-bold px-2 py-0.5 rounded-full ${(user.totalSlot - (user.bookedSlots || 0)) > 0
+                                                ? "bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400"
+                                                : "bg-rose-50 text-rose-600 dark:bg-rose-950/40 dark:text-rose-400"
+                                            }`}>
+                                            {Math.max(0, user.totalSlot - (user.bookedSlots || 0))}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
 
@@ -212,12 +241,7 @@ const TutorDetails = async ({ params }) => {
                             </div>
 
                             {/* বুক বাটন */}
-                            <button className="w-full bg-slate-900 dark:bg-teal-600 text-white dark:text-zinc-100 font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-slate-800 dark:hover:bg-teal-700 active:scale-95 transition-all shadow-md">
-                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
-                                Book Session Now
-                            </button>
+                            <BookButton tutor={user} user={sessionUser}></BookButton>
 
                             <p className="text-xs text-center text-slate-400 dark:text-zinc-500 leading-relaxed">
                                 Flexible cancellation policy up to 24 hours before the session start time.
