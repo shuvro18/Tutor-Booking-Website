@@ -1,69 +1,22 @@
-// 'use client';
-
-// import React, { useTransition } from 'react';
-// import { bookSlotAction } from "../lib/actions";
-
-// const BookButton = ({ user, userId }) => {
-//     const [isPending, startTransition] = useTransition();
-
-//     // হিসাব: Total Slot - Booked Slots
-//     const totalSlot = user?.totalSlot || 0;
-//     const bookedSlots = user?.bookedSlots || 0;
-//     const remainingSlots = totalSlot - bookedSlots;
-
-//     const handleBooking = () => {
-//         if (!userId) {
-//             alert("Please login first to book a session!");
-//             return;
-//         }
-
-//         startTransition(async () => {
-//             const result = await bookSlotAction({
-//                 tutorId: user?._id,
-//                 userId: userId,
-//             });
-
-//             alert(result.message);
-//         });
-//     };
-
-//     return (
-//         <div>
-//             <button 
-//                 disabled={isPending || remainingSlots <= 0} 
-//                 onClick={handleBooking} 
-//                 className="w-full bg-slate-900 dark:bg-teal-600 text-white dark:text-zinc-100 font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-slate-800 dark:hover:bg-teal-700 active:scale-95 transition-all shadow-md disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100"
-//             >
-//                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-//                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-//                 </svg>
-//                 {isPending
-//                     ? 'Booking...'
-//                     : remainingSlots > 0
-//                         ? 'Book Session Now'
-//                         : 'Fully Booked'}
-//             </button>
-//         </div>
-//     );
-// };
-
-// export default BookButton;
-
-
 import React from 'react';
 import Image from 'next/image';
 import { auth } from '../lib/auth';
 import { headers } from 'next/headers';
 import { getBooking } from '../lib/data';
-import CancelButton from '../components/CancelButton';
+
+import { Trash } from 'lucide-react';
 
 const MyBookedSession = async () => {
     const session = await auth.api.getSession({
-        headers: await headers()
+        headers: await headers() // you need to pass the headers object.
     });
     const userId = session.user.id;
 
     const bookedData = await getBooking(userId);
+    console.log(bookedData.length)
+
+    let state = "ha"
+
 
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-zinc-950 py-10 px-4 md:px-8 transition-colors duration-300">
@@ -98,18 +51,13 @@ const MyBookedSession = async () => {
                             {/* টেবিল বডি */}
                             <tbody className="divide-y divide-slate-100 dark:divide-zinc-800/60 text-sm font-medium text-slate-700 dark:text-zinc-200">
                                 {bookedData.map((item) => (
-                                    <tr key={item.id} className="hover:bg-slate-50/50 dark:hover:bg-zinc-800/30 transition-colors">
+                                    <tr key={item._id} className="hover:bg-slate-50/50 dark:hover:bg-zinc-800/30 transition-colors">
 
                                         {/* টিউটর নেম ও অ্যাভাটার */}
                                         <td className="py-4 px-6 flex items-center gap-3">
-                                            {/* Image ট্যাগটি self-closing করা হয়েছে */}
-                                            <Image 
-                                                src={item.tutorImage || "/placeholder.png"} 
-                                                height={40} 
-                                                width={40} 
-                                                alt={item.tutorName || 'Tutor Image'} 
-                                                className="w-10 h-10 rounded-full object-cover shrink-0" 
-                                            />
+                                            <Image src={item.tutorImage} height={100} width={100} alt='hello' className={`w-10 h-10 rounded-full font-bold flex items-center justify-center text-xs shrink-0 text-white ${item.avatarBg}`}>
+
+                                            </Image>
                                             <span className="font-bold text-slate-900 dark:text-white">
                                                 {item.tutorName}
                                             </span>
@@ -125,24 +73,23 @@ const MyBookedSession = async () => {
                                             {item.email}
                                         </td>
 
-                                        {/* স্ট্যাটাস (ডাটাবেজের item.status অনুযায়ী) */}
+                                        {/* স্ট্যাটাস */}
                                         <td className="py-4 px-6">
-                                            {item.status === 'CANCELLED' ? (
-                                                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-rose-50 text-rose-500 dark:bg-rose-950/40 dark:text-rose-400 border border-rose-100 dark:border-rose-900/50">
-                                                    <span className="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
-                                                    CANCELLED
-                                                </span>
-                                            ) : (
+                                            
                                                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-600 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-100 dark:border-blue-900/50">
                                                     <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
                                                     BOOKED
                                                 </span>
-                                            )}
+                                           
                                         </td>
 
-                                        {/* অ্যাকশন বাটন (প্রতিটি বুকিং-এর id পাস করা হচ্ছে) */}
-                                        <td className="py-4 px-6 text-right">
-                                            <CancelButton bookingId={item.id} status={item.status} />
+                                        {/* অ্যাকশন বাটন */}
+                                        <td className="py-6 px-6 text-right">
+
+                                            <button className="text-rose-600 dark:text-rose-400 hover:text-rose-700 font-semibold text-sm transition-all hover:underline cursor-pointer">
+                                               <Trash></Trash>
+                                            </button>
+
                                         </td>
                                     </tr>
                                 ))}
@@ -155,5 +102,6 @@ const MyBookedSession = async () => {
         </div>
     );
 };
+
 
 export default MyBookedSession;

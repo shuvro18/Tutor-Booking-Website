@@ -36,7 +36,7 @@ const BookButton = ({ tutor, user }) => {
             availableTime,
         }
         try {
-            const sendBooking = await bookingUser(bookingData);
+            const sendBooking = await bookingUser(s);
 
             if(sendBooking && (sendBooking.insertedId)){
                 toast.success("Booking successfully");

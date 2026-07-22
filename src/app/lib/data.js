@@ -18,3 +18,10 @@ export const getUserCollection = async (email)=>{
     return data 
 
 }
+
+export const getBooking = async (bookingData)=>{
+    const res = await fetch(`http://localhost:5000/booking/${bookingData}`);
+    const data = await res.json();
+    return data 
+
+}
