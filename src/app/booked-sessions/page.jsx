@@ -50,7 +50,8 @@ const MyBookedSession = async () => {
 
                             {/* টেবিল বডি */}
                             <tbody className="divide-y divide-slate-100 dark:divide-zinc-800/60 text-sm font-medium text-slate-700 dark:text-zinc-200">
-                                {bookedData.map((item) => (
+                                {bookedData && bookedData.length> 0 ?(
+                                    bookedData.map((item) => (
                                     <tr key={item._id} className="hover:bg-slate-50/50 dark:hover:bg-zinc-800/30 transition-colors">
 
                                         {/* টিউটর নেম ও অ্যাভাটার */}
@@ -90,7 +91,31 @@ const MyBookedSession = async () => {
 
                                         </td>
                                     </tr>
-                                ))}
+                                ))
+                                ): (
+                                    <tr>
+                                        <td colSpan="5" className="py-16 text-center">
+                                            <div className="flex flex-col items-center justify-center space-y-3">
+                                                {/* আইকন */}
+                                                <div className="w-16 h-16 rounded-full bg-slate-100 dark:bg-zinc-800/80 flex items-center justify-center text-slate-400 dark:text-zinc-500">
+                                                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                    </svg>
+                                                </div>
+                                                
+                                                {/* টেক্সট */}
+                                                <div className="space-y-1">
+                                                    <h3 className="text-lg font-bold text-slate-800 dark:text-zinc-200">
+                                                        No Booked Sessions Found
+                                                    </h3>
+                                                    <p className="text-sm text-slate-400 dark:text-zinc-500">
+                                                        You have not booked any tutoring sessions yet.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )}
                             </tbody>
                         </table>
                     </div>
