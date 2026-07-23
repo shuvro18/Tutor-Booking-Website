@@ -13,7 +13,7 @@ const MyBookedSession = async () => {
     const userId = session.user.id;
 
     const bookedData = await getBooking(userId);
-    console.log(userId)
+    // console.log(userId)
 
 //    const deleted = await deleteBooking()
 

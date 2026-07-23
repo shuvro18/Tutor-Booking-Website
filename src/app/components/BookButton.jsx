@@ -2,8 +2,13 @@
 
 import { toast } from "react-toastify";
 import { bookingUser } from "../lib/actions";
+import { getBooking } from "../lib/data";
+import { authClient } from "../lib/auth-client";
 
 const BookButton = ({ tutor, user }) => {
+    const { data: session } = authClient.useSession();
+    const loginUser = session?.user?.id;
+
 
     // availableTime: "Mon - Wed 4:00 PM - 6:00 PM"
     // experience: "Practicing physician offering comprehensive guidelines on clinical pathology."
@@ -35,19 +40,35 @@ const BookButton = ({ tutor, user }) => {
             teachingMode,
             availableTime,
         }
+
+        const loadData = await getBooking(loginUser)
+
+
+        const find = loadData.find(element => element?.tutorImage === photoUrl);
+
+
+        if (find) {
+            toast.error("already in booked sessionn");
+            return
+        }
+
         try {
             const sendBooking = await bookingUser(bookingData);
 
-            if(sendBooking && (sendBooking.insertedId)){
+            if (sendBooking && (sendBooking.insertedId)) {
                 toast.success("Booking successfully");
             }
         } catch (err) {
             console.log("This is error", err)
             toast.error("Network error. Please try again");
         }
+
+
     }
+   
+
     return (
-        <div>
+        <div className="cursor-pointer">
             <button onClick={handleBooking} className="w-full bg-slate-900 dark:bg-teal-600 text-white dark:text-zinc-100 font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-slate-800 dark:hover:bg-teal-700 active:scale-95 transition-all shadow-md">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />

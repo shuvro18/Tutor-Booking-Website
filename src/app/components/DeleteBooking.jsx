@@ -40,11 +40,11 @@ const DeleteBooking = ({ deleted, id }) => {
                                 <Button className="w-full" slot="close">
                                     Keep In Booking
                                 </Button>
-                                <button onClick={() => { handle(id) }} className="text-rose-600 dark:text-rose-400 hover:text-rose-700 font-semibold text-sm transition-all hover:underline cursor-pointer">
-                                    <div className="flex justify-between items-center">
+                                <Button variant="danger" onClick={() => { handle(id) }} className="w-full" slot="close">
+                                    <div className="flex gap-2 items-center">
                                         <p>Conform Delete</p> <Trash></Trash>
                                     </div>
-                                </button>
+                                </Button>
                             </AlertDialog.Footer>
                         </AlertDialog.Dialog>
                     </AlertDialog.Container>
