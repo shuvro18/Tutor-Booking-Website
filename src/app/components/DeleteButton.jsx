@@ -19,7 +19,7 @@ const DeleteButton = ({ deleteTutor, id }) => {
                 >
                     <AlertDialog.Container>
                         <AlertDialog.Dialog className="sm:max-w-105">
-                            <AlertDialog.CloseTrigger />
+                            <AlertDialog.CloseTrigger className="dark:text-white text-black" />
                             <AlertDialog.Header className="items-center text-center">
                                 <AlertDialog.Icon status="danger">
                                     <TriangleExclamation className="size-5" />
@@ -27,7 +27,7 @@ const DeleteButton = ({ deleteTutor, id }) => {
                                 <AlertDialog.Heading>Permanently delete your account?</AlertDialog.Heading>
                             </AlertDialog.Header>
                             <AlertDialog.Body>
-                                <p>
+                                <p className='dark:text-white text-black'>
                                     This action cannot be undone. All your data, settings, and content will be
                                     permanently removed from our servers. The dramatic red backdrop emphasizes the
                                     severity and irreversibility of this decision.

@@ -22,7 +22,7 @@ const DeleteBooking = ({ deleted, id }) => {
                 >
                     <AlertDialog.Container>
                         <AlertDialog.Dialog className="sm:max-w-105">
-                            <AlertDialog.CloseTrigger />
+                            <AlertDialog.CloseTrigger className="dark:text-white text-black" />
                             <AlertDialog.Header className="items-center text-center">
                                 <AlertDialog.Icon status="danger">
                                     <TriangleExclamation className="size-5" />
